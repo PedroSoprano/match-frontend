@@ -49,6 +49,7 @@ function App() {
     setFormData({
       ...formData,
       diagnostico:  value.id,
+      codEnf: value.codEnf
     });
   }
 
@@ -64,9 +65,21 @@ function App() {
     if(isObjectEmpty(formData)){
       toast.error("Todos os campos devem ser preenchidos")
     }else{
-      console.log(formData)
-      api.post("/api/diagnostico").then(() => {
+      api.post("/api/diagnostico", formData).then(() => {
         toast.success("Diagnóstico cadastrado com sucesso!")
+        setFormData({
+          diagnostico: "",
+          resultadosEsperados: "",
+          codEnf: "",
+          causas: [],
+          dominio: "", 
+          classe: "",
+          intervencoes: [],
+        })
+        setIntervencoes([])
+        setTimeout(() => {
+          window.location.reload()
+        }, 5000)
       }).catch(() => {
         toast.error("Ocorreu um erro ao cadastrar o diagnóstico")
       })
@@ -186,9 +199,12 @@ function App() {
           )}
         />
 
-      <TextField
+        <TextField
           name="codEnf"
-          placeholder="Código enfermagem"
+          label="Código enfermagem"
+          disabled={true}
+          value={formData.codEnf}
+          placeholder={formData.codEnf ? "" : "Código enfermagem"}
           sx={{ marginBottom: 2 }}
           onChange={handleInputChange}
         />
@@ -209,7 +225,6 @@ function App() {
           )}
         />
 
-
         <Autocomplete
           id="dominio"
           options={dominios}
@@ -218,7 +233,6 @@ function App() {
           onChange={(event, value: any) => setFormData({ ...formData, dominio: (value.id) })}
           renderInput={(params) => <TextField {...params} label="Domínio" />}
         />
-
 
         <Autocomplete
           id="classe"
@@ -268,6 +282,7 @@ function App() {
           
         <TextField
           name="resultadosEsperados"
+          label="Resultados esperados"
           placeholder="Resultados esperados"
           sx={{ marginBottom: 2 }}
           onChange={handleInputChange}
