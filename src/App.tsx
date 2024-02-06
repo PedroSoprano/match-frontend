@@ -179,7 +179,7 @@ function App() {
         }}
       >
         <Typography sx={{marginBottom: "20px", fontSize: "25px", color: "#01828e", fontWeight: 900}}>
-          Cadastro de causas e diagnósticos
+          Cadastro de evidências clínicas e diagnósticos
         </Typography>
 
 
@@ -219,7 +219,7 @@ function App() {
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Causas"
+              label="Evidências clínicas"
               placeholder="Selecione"
             />
           )}
