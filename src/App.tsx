@@ -51,6 +51,8 @@ function App() {
       diagnostico:  value.id,
       codEnf: value.codEnf
     });
+    setIntervencoes(value.intervencao)
+    console.log(value.intervencao)
   }
 
   // const handleIntervencoesChange = (event) => {
@@ -128,19 +130,6 @@ function App() {
     opcional: false,
   });
 
-  const handleDescricaoChange = (event: any) => {
-    setIntervencaoAtual({
-      ...intervencaoAtual,
-      descricao: event.target.value,
-    });
-  };
-
-  const handleOpcionalChange = (event: any) => {
-    setIntervencaoAtual({
-      ...intervencaoAtual,
-      opcional: event.target.checked,
-    });
-  };
 
   const adicionarIntervencao = () => {
     setIntervencoes([...intervencoes, intervencaoAtual]);
@@ -243,33 +232,13 @@ function App() {
           renderInput={(params) => <TextField {...params} label="Classe" />}
         />
 
-        <Box sx={{alignItems: "center", display: "flex", justifyContent: "space-between"}}>
-            <TextField
-              label="Intervenção"
-              value={intervencaoAtual.descricao}
-              onChange={handleDescricaoChange}
-              margin="normal"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={intervencaoAtual.opcional}
-                  onChange={handleOpcionalChange}
-                />
-              }
-              label="Opcional"
-            />
-            <Button variant="contained" sx={{backgroundColor: "#01828e", borderRadius: 25}} disabled={intervencaoAtual.descricao == ""} onClick={adicionarIntervencao}>
-              +
-            </Button>
-          </Box>
           <Typography sx={{margin: "20px 0px", fontSize: "19px", color: "#01828e", fontWeight: 200}}>Intervenções</Typography>
-          <Box sx={{backgroundColor: "#e7e7e7", borderRadius: 2, padding: "20px", minHeight: "150px",  marginBottom: "20px"}}>
+          <Box sx={{backgroundColor: "#e7e7e7", borderRadius: 2, padding: "20px", minHeight: "150px",  marginBottom: "20px", overflowY: "auto"}}>
             <ul>
             {
             intervencoes.length > 0 ?
             intervencoes.map((item: any) => (
-              <Typography sx={{fontSize: "14px"}}>{item.descricao}  {item.opcional ? "(Opicional)" : "(Obrigatório)"}</Typography>
+              <Typography sx={{fontSize: "14px"}}> ● {item.nome} {item.opcional ? "(Opicional)" : "(Obrigatório)"}</Typography>
             ))
             :
             <Box sx={{width: "100%", height: "150px", display: "flex", alignItems: "center", justifyContent: "center"}}>
