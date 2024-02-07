@@ -238,7 +238,7 @@ function App() {
             {
             intervencoes.length > 0 ?
             intervencoes.map((item: any) => (
-              <Typography sx={{fontSize: "14px"}}> ● {item.nome} {item.opcional ? "(Opicional)" : "(Obrigatório)"}</Typography>
+              <Typography sx={{fontSize: "14px"}}> ● {item.nome} {item.opcional ? "(Opcional)" : "(Obrigatório)"}</Typography>
             ))
             :
             <Box sx={{width: "100%", height: "150px", display: "flex", alignItems: "center", justifyContent: "center"}}>
