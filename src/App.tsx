@@ -18,7 +18,6 @@ function App() {
     causas: [],
     dominio: "", 
     classe: "",
-    intervencoes: [],
   });
 
   const isObjectEmpty = (obj: any) => {
